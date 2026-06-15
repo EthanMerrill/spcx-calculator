@@ -56,8 +56,8 @@ export const ETF_DATA: ETF[] = [
 	{
 		ticker: "XOVR",
 		name: "ERShares Private-Public Crossover",
-		spcxWeight: 0.1376,
-		spcxWeightLabel: "13.76%",
+		spcxWeight: 0.1614,
+		spcxWeightLabel: "16.14%",
 		currentPrice: 19.96,
 		indexRule: "Historically aggressive private-equity style allocation.",
 	},
@@ -93,4 +93,12 @@ export const ETF_DATA: ETF[] = [
 		currentPrice: 75.65,
 		indexRule: "Cathie Wood actively purchased ~$444M in shares immediately following the IPO.",
 	},
+	// {
+	// 	ticker: "ITOT",
+	// 	name: "iShares Core S&P Total U.S. Stock Market ETF",
+	// 	spcxWeight: 0.0007,
+	// 	spcxWeightLabel: "~0.07%",
+	// 	currentPrice: 104.56,
+	// 	indexRule: "Diluted across the entire investable U.S. stock market.",
+	// },
 ];

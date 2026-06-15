@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SPCXCalculator from '../components/SPCXCalculator';
+import { SPCX_PRICE } from '../data/etfs';
 ---
 
 <!doctype html>
@@ -37,11 +38,12 @@ import SPCXCalculator from '../components/SPCXCalculator';
 
       <footer class="site-footer">
         <p>
+          Data is updated daily at 4:30 EST.
           Estimates are based on reported SPCX weights at time of data collection.
-          Weights change as ETF rebalancing occurs. Not financial advice.
+          Weights are updated manually based on the latest available data. Not financial advice.
         </p>
         <p style="margin-top: 0.25rem;">
-          SPCX reference price: <strong style="color: var(--text-secondary); font-family: var(--mono);">$178.50</strong>
+          SPCX reference price: <strong style="color: var(--text-secondary); font-family: var(--mono);">${SPCX_PRICE.toFixed(2)}</strong>
           &nbsp;·&nbsp; ETF prices are placeholder values — update in <code>src/data/etfs.ts</code>
         </p>
       </footer>
