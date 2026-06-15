@@ -4,6 +4,6 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [react()],
   output: 'static',
-  site: 'https://ethanmerrill.github.io',
-  base: '/spcx-calculator',
+  site: 'https://howmuchspcx.com',
+  // base: '/spcx-calculator',
 });
