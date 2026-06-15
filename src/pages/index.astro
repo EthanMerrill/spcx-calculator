@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import SPCXCalculator from '../components/SPCXCalculator';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPCX Exposure Calculator</title>
+    <meta name="description" content="Calculate your indirect financial exposure to SpaceX (SPCX) through ETFs you already own." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div class="stars-bg" aria-hidden="true"></div>
+
+    <div class="page-wrapper">
+      <header class="site-header">
+        <div class="logo">
+          <span>🛸</span>
+          <span>SpaceX Exposure Tracker</span>
+        </div>
+        <h1>How Much SPCX<br />Do You Actually Own?</h1>
+        <p class="subtitle">
+          Enter your ETF holdings to discover your indirect exposure to
+          <span class="spcx-pill">SPCX</span> hidden inside the funds you already own.
+        </p>
+      </header>
+
+      <main>
+        <SPCXCalculator client:load />
+      </main>
+
+      <footer class="site-footer">
+        <p>
+          Estimates are based on reported SPCX weights at time of data collection.
+          Weights change as ETF rebalancing occurs. Not financial advice.
+        </p>
+        <p style="margin-top: 0.25rem;">
+          SPCX reference price: <strong style="color: var(--text-secondary); font-family: var(--mono);">$178.50</strong>
+          &nbsp;·&nbsp; ETF prices are placeholder values — update in <code>src/data/etfs.ts</code>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

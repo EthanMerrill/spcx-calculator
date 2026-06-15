@@ -1,0 +1,57 @@
+name: Update ETF & SPCX Prices
+
+on:
+  schedule:
+    # Mon–Fri @ 20:30 UTC = 4:30 PM Eastern (30 min after market close)
+    #   - Standard Time (Nov–Mar): 4:30 PM ET = 21:30 UTC
+    #   - Daylight Time  (Mar–Nov): 4:30 PM ET = 20:30 UTC
+    #
+    # GitHub scheduled events can drift by up to ~15 min.
+    # We run two cron entries to cover both halves of the year.
+    - cron: "30 20 * * 1-5" # EDT (summer)
+    - cron: "30 21 * * 1-5" # EST (winter)
+
+  workflow_dispatch:
+    # Allow manual triggers from the GitHub Actions UI
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch & write updated prices
+        env:
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+        run: npx tsx scripts/update-prices.ts
+
+      - name: Commit & push changes (if any)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add src/data/etfs.ts
+          if git diff --cached --quiet; then
+            echo "No price changes. Nothing to commit."
+            exit 0
+          fi
+
+          TODAY=$(date -u '+%Y-%m-%d')
+          git commit -m "chore: update ETF/SPCX prices for ${TODAY}"
+          git push
